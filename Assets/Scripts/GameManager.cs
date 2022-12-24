@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     private Player _player;
 
+    public GameState GameState = GameState.Aiming;
+
     private void Awake()
     {
         _numBreakablesRemaining = FindObjectsOfType<Breakable>().Length;

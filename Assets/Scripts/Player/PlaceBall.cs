@@ -36,6 +36,7 @@ public class PlaceBall : BallMovement
 		_aimBall.enabled = true;
 		_arrow.gameObject.SetActive(true);
 		EnableBarrierColliders(false);
+		_gameManager.GameState = GameState.Aiming;
 	}
 
 	private void MoveBallToStartingPosition()

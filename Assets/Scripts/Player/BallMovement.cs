@@ -13,11 +13,13 @@ public class BallMovement : MonoBehaviour
 	protected GameObject _barrierParent;
 	protected Collider2D[] _placementBarriers;
 	private Collider2D[] _barrierColliders;
+	protected GameManager _gameManager;
 
 	protected virtual void Awake()
 	{
 		_player = FindObjectOfType<Player>();
 		_camera = Camera.main;
+		_gameManager = FindObjectOfType<GameManager>();
 
 		_arrow.gameObject.SetActive(false);
 

@@ -36,6 +36,7 @@ public class AimBall : BallMovement
 		_placeBall.enabled = true;
 		_arrow.gameObject.SetActive(false);
 		EnableBarrierColliders(true);
+		_gameManager.GameState = GameState.Placing;
 	}
 
 	private void SetArrow()
@@ -53,5 +54,6 @@ public class AimBall : BallMovement
 		Vector2 mousePosition = _mousePosition;
 		Vector2 playerPosition = _player.Position;
 		_player.Shoot((mousePosition - playerPosition).normalized);
+		_gameManager.GameState = GameState.Shooting;
 	}
 }

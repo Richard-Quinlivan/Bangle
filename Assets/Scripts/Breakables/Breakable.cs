@@ -13,7 +13,10 @@ public class Breakable : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Player"))
 		{
-			Break();	
+			if (_gameManager.GameState == GameState.Shooting)
+			{
+				Break();
+			}
 		}
 	}
 
