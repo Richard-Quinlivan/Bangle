@@ -6,21 +6,24 @@ public class BouncesRemainingHandler : MonoBehaviour
     private TextMeshProUGUI _bouncesRemaingText;
     [SerializeField]
     private int _bouncesRemainingCount;
-    private Player _player;
+    private PlayerCollider _playerCollider;
 
-    void Awake()
+	private GameManager _gameManager;
+
+
+	void Awake()
     {
-        _bouncesRemaingText = GetComponent<TextMeshProUGUI>();
-		_player = FindObjectOfType<Player>();
-        _player.OnBarrierHit += DecrementBouncesRemaining;
-
+		_gameManager = FindObjectOfType<GameManager>();
+		_bouncesRemaingText = GetComponent<TextMeshProUGUI>();
+		_playerCollider = FindObjectOfType<PlayerCollider>();
+        _playerCollider.OnBarrierHit += DecrementBouncesRemaining;
 
         _bouncesRemaingText.text = _bouncesRemainingCount.ToString();
     }
 
 	private void OnDestroy()
 	{
-		_player.OnBarrierHit -= DecrementBouncesRemaining;
+		_playerCollider.OnBarrierHit -= DecrementBouncesRemaining;
 	}
 
 	private void DecrementBouncesRemaining()
@@ -35,6 +38,6 @@ public class BouncesRemainingHandler : MonoBehaviour
 
 	private void End()
     {
-        _player.Stop();
-    }
+		_gameManager.LoseLevel();
+	}
 }

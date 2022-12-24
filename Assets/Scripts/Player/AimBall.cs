@@ -1,21 +1,14 @@
 using UnityEngine;
 using Utilities;
 
-public class AimBall : MonoBehaviour
+public class AimBall : BallMovement
 {
 	private PlaceBall _placeBall;
-	private Camera _camera;
-	private Player _player;
-
-	[SerializeField]
-	private Transform _arrow;
-
 	private Vector3 _mousePosition;
 
-	private void Start()
+	protected override void Awake()
 	{
-		_player = FindObjectOfType<Player>();
-		_camera = Camera.main;
+		base.Awake();
 		_placeBall = GetComponent<PlaceBall>();
 	}
 
@@ -29,13 +22,20 @@ public class AimBall : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			ShootBall();
+			EnableBarrierColliders(true);
 		}
 		else if (Input.GetMouseButtonDown(1))
 		{
-			this.enabled = false;
-			_placeBall.enabled = true;
-			_arrow.gameObject.SetActive(false);
+			SwitchToPlaceBall();
 		}
+	}
+
+	private void SwitchToPlaceBall()
+	{
+		this.enabled = false;
+		_placeBall.enabled = true;
+		_arrow.gameObject.SetActive(false);
+		EnableBarrierColliders(true);
 	}
 
 	private void SetArrow()
