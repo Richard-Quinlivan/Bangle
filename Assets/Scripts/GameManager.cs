@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class GameManager : MonoBehaviour
     private int _numBreakablesRemaining;
 
     private Player _player;
-
+    public LevelData LevelData;
     public GameState GameState = GameState.Aiming;
 
     private void Awake()
@@ -15,7 +16,12 @@ public class GameManager : MonoBehaviour
         _player = FindObjectOfType<Player>();
     }
 
-    public void BreakableHit()
+    public void ReloadLevel()
+    {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void BreakableHit()
     {
         _numBreakablesRemaining--;
         if (_numBreakablesRemaining == 0)
@@ -28,6 +34,8 @@ public class GameManager : MonoBehaviour
     {
         print("You Win");
 		_player.Stop();
+
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 	public void LoseLevel()

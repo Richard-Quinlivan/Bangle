@@ -9,7 +9,6 @@ public class BallMovement : MonoBehaviour
 	protected Transform _arrow;
 	protected Camera _camera;
 	protected Player _player;
-	[SerializeField]
 	protected GameObject _barrierParent;
 	protected Collider2D[] _placementBarriers;
 	private Collider2D[] _barrierColliders;
@@ -23,7 +22,7 @@ public class BallMovement : MonoBehaviour
 
 		_arrow.gameObject.SetActive(false);
 
-
+		_barrierParent = GameObject.FindGameObjectWithTag("BarrierParent");
 		_placementBarriers = new Collider2D[_barrierParent.transform.childCount];
 		for (int i = 0; i < _barrierParent.transform.childCount; i++)
 		{

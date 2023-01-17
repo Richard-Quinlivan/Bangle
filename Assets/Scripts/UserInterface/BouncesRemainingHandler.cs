@@ -18,7 +18,8 @@ public class BouncesRemainingHandler : MonoBehaviour
 		_playerCollider = FindObjectOfType<PlayerCollider>();
         _playerCollider.OnBarrierHit += DecrementBouncesRemaining;
 
-        _bouncesRemaingText.text = _bouncesRemainingCount.ToString();
+		_bouncesRemainingCount = _gameManager.LevelData.NumBounces;
+		_bouncesRemaingText.text = _bouncesRemainingCount.ToString();
     }
 
 	private void OnDestroy()
@@ -27,17 +28,12 @@ public class BouncesRemainingHandler : MonoBehaviour
 	}
 
 	private void DecrementBouncesRemaining()
-    {
-        if (_bouncesRemainingCount <= 1)
-        {
-		    End();
+	{
+		if (_bouncesRemainingCount <= 1)
+		{
+			_gameManager.LoseLevel();
 		}
-        _bouncesRemainingCount--;
-        _bouncesRemaingText.text = _bouncesRemainingCount.ToString();
-	}
-
-	private void End()
-    {
-		_gameManager.LoseLevel();
+		_bouncesRemainingCount--;
+		_bouncesRemaingText.text = _bouncesRemainingCount.ToString();
 	}
 }
